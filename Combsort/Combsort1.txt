@@ -1,0 +1,78 @@
+﻿
+public class Combsort {
+	public static void main(String Args[]) {
+		Combsort cs = new Combsort();
+		int arr[] = {1, 10, 2, 9, 3, 8, 4, 7, 5, 6};
+		cs.sort(arr);
+		
+		System.out.println("sorted array");
+        for (int i=0; i<arr.length; i++) {
+        	System.out.print(arr[i] + " ");
+        }
+	}
+	
+	// To find gap between elements 
+	// หาช่องว่างระหว่าง element
+    int getNextGap(int gap)
+    {
+        // Shrink gap by Shrink factor
+    	// หดตัวโดย Shrink factor
+        gap = (gap*10)/13;
+        if (gap < 1)
+            return 1;
+        return gap;
+    }
+ 
+    // Function to sort arr[] using Comb Sort 
+    // ฟังก์ชันการเรียงลำดับ arr [] โดยใช้  Comb Sort  
+    void sort(int arr[])
+    {
+        int n = arr.length;
+ 
+        // initialize gap 
+        // เริ่มต้นช่องว่าง
+        int gap = n;
+ 
+        // Initialize swapped as true to make sure that
+        // เริ่มต้นเปลี่ยนเป็นจริงเพื่อททำให้แน่ใจ
+        // loop runs
+        // รันลูป
+        boolean swapped = true;
+ 
+        // Keep running while gap is more than 1 and last
+        // ให้ทำงานต่อไปในขณะที่ช่องว่างมากกว่า 1 และครั้งสุดท้าย
+        // iteration caused a swap
+        // การทำซ้ำทำให้เกิดการแลกเปลี่ยน
+        while (gap != 1 || swapped == true)
+        {
+            // Find next gap
+        	// ค้นหาช่องว่างถัดไป
+            gap = getNextGap(gap);
+ 
+            // Initialize swapped as false so that we can
+            // เริ่มต้นเปลี่ยนเป็นเท็จเพื่อให้เราสามารถทำได้
+            // check if swap happened or not
+            // ตรวจสอบว่าการแลกเปลี่ยนเกิดขึ้นหรือไม่
+            swapped = false;
+ 
+            // Compare all elements with current gap
+            // เปรียบเทียบ element ทั้งหมดที่มีช่องว่างปัจจุบัน
+            for (int i=0; i<n-gap; i++)
+            {
+                if (arr[i] > arr[i+gap])
+                {
+                    // Swap arr[i] and arr[i+gap]
+                	// เปลี่ยน arr[i] เเละ เปลี่ยน arr[i+gap] 
+                    int temp = arr[i];
+                    arr[i] = arr[i+gap];
+                    arr[i+gap] = temp;
+ 
+                    // Set swapped
+                    // ตั้งการสับเปลี่ยน
+                    swapped = true;
+                }
+            }
+        }
+    }
+
+}
